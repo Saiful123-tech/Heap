@@ -1,0 +1,46 @@
+/*************************************************************
+    
+    Following is the Binary Tree node structure:
+
+	class BinaryTreeNode {
+		
+	public :
+		int data;
+		BinaryTreeNode* left;
+		BinaryTreeNode* right;
+
+		BinaryTreeNode(int data) {
+		this -> left = NULL;
+		this -> right = NULL;
+		this -> data = data;
+		}
+	};
+
+*************************************************************/
+void inorder(BinaryTreeNode* root,vector<int> &v){
+	if(root==NULL){
+		return;
+	}
+	inorder(root->left,v);
+	v.push_back(root->data);
+	inorder(root->right,v);
+}
+void preorder(BinaryTreeNode* root,vector<int> &v,int &index){
+	if(root==NULL){
+		return;
+	}
+	int ans=v[index++];
+	root->data=ans;
+	preorder(root->left,v,index);
+	preorder(root->right,v,index);
+	
+}
+BinaryTreeNode* convertBST(BinaryTreeNode* root)
+{
+	// Write your code here.
+	vector<int> v;
+	int index=0;
+	inorder(root,v);
+	preorder(root,v,index);
+	return root;
+}
