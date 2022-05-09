@@ -1,0 +1,46 @@
+Approach 1
+#include<bits/stdc++.h>
+int getKthLargest(vector<int> &arr, int k)
+{
+	//	Write your code here.
+	vector<int> v;
+	for(int i=0;i<arr.size();i++){
+		int sum=0;
+		for(int j=i;j<arr.size();j++){
+			sum+=arr[j];
+			v.push_back(sum);
+		}
+		
+	}
+	sort(v.begin(),v.end());
+	return v[v.size()-k];
+}
+TC o(n2logn)
+SC o(n2)
+  
+  Approach 2
+    class Solution{
+public:
+    int kthLargest(vector<int> &Arr,int N,int K){
+         priority_queue<int, vector<int>, greater<int> > pq;
+	for(int i=0;i<Arr.size();i++){
+		int sum=0;
+		for(int j=i;j<Arr.size();j++){
+			sum+=Arr[j];
+			if(pq.size()<K){
+			    pq.push(sum);
+			}
+			else{
+			    if(pq.top()<sum){
+			        pq.pop();
+			        pq.push(sum);
+			    }
+			}
+		}
+		
+	}
+	return pq.top();
+    }
+};
+TC o(n2logk)
+SC o(k)
